@@ -2,165 +2,242 @@
 body{
     background-image:url("carbon.jpg");
 }
-.tab {
-    float: left;
-    border: 1px solid #ccc;
-    background-color: #f1f1f1;
-    width: 30%;
-    height: 300px;
+buttonsLeft .box:hover:not(.invisible,.full){
+    left: 0px;
 }
-
-/* Style the buttons that are used to open the tab content */
-.tab button {
-    display: block;
-    background-color: inherit;
-    color: black;
-    padding: 22px 16px;
-    width: 100%;
-    border: none;
-    outline: none;
-    text-align: left;
-    cursor: pointer;
-    transition: 0.3s;
+buttonsLeft .box img{
+    box-sizing: border-box;
+    width: 315px;
+    height: 85px;
+    border-right: 1px solid #000000;
+    border-radius: 100px;
+    object-fit: cover;
 }
+buttonsLeft .box .text{
 
-/* Change background color of buttons on hover */
-.tab button:hover {
-    background-color: #ddd;
-}
 
-/* Create an active/current "tab button" class */
-.tab button.active {
-    background-color: #ccc;
-}
+    width: 315px;
+    height: 90px;
+    left: 0px;
+    top: 135px;
 
-/* Style the tab content */
-.tabcontent {
-    float: left;
-    padding: 0px 12px;
-    border: 1px solid #ccc;
-    width: 70%;
-    border-left: none;
-    height: 300px;
-}
-.navbar {
-    overflow: hidden;
-    left: 100px;
-    background-image: url("carbon.jpg");
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 15px;
+    display: flex;
 
-    font-family: Arial;
-}
-
-/* Links inside the navbar */
-.navbar a {
-    float: left;
-    font-size: 16px;
-    color: white;
+    align-items: center;
     text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+    justify-content: center;
+    color: #000000;
 }
-
-/* The dropdown container */
-.dropdown {
-    float: left;
-    overflow: hidden;
-}
-
-/* Dropdown button */
-.dropdown .dropbtn {
-    font-size: 16px;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 14px 16px;
-    background-color: inherit;
-    font: inherit; /* Important for vertical align on mobile phones */
-    margin: 0; /* Important for vertical align on mobile phones */
-}
-
-/* Add a red background color to navbar links on hover */
-.navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: forestgreen;
-}
-
-/* Dropdown content (hidden by default) */
-.dropdown-content {
-    display: none;
+buttonsLeft .box{
+    transition: 0.5s;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
     position: absolute;
-    background-color: #f9f9f9;
-    width: 100%;
-    left: 0;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    left: -315px;
+    background: #D9D9D9;
+    border-right: 2px solid #000000;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 100px 100px 100px 100px;
 }
+buttonsLeft #zakaz{
 
-/* Mega Menu header, if needed */
-.dropdown-content .header {
-    background: forestgreen;
-    padding: 16px;
-    color: white;
+    width: 630px;
+    height: 90px;
+
+    top: 135px;
 }
+buttonsLeft #viezd{
 
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
+    width: 630px;
+    height: 90px;
+
+    top: 235px;
+}
+buttonsLeft #otchet{
+
+    width: 630px;
+    height: 90px;
+
+    top: 335px;
+}
+buttonsLeft #masters{
+
+    width: 630px;
+    height: 90px;
+
+    top: 435px;
+}
+buttonsTop .box:hover:not(.invisible,.full){
+top:-100px;
+}
+buttonsTop .box{
+    transition: 0.8s;
     display: block;
+    justify-content: center;
+    box-sizing: border-box;
+    position: absolute;
+    top: -208px;
+    background: #D9D9D9;
+    border-radius: 100px 100px 100px 100px;
 }
-
-/* Create three equal columns that floats next to each other */
-.column {
-    float: left;
-    width: 33.33%;
-    padding: 10px;
-    background-color: #ccc;
-    height: 250px;
+buttonsTop #profile{
+    width: 116px;
+    height: 343px;
+    left: 1175px;
+    padding-top: 30px;
 }
-
-/* Style links inside the columns */
-.column a {
-    float: none;
-    color: black;
-    padding: 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
+buttonsTop #back{
+    width: 400px;
+    height: 300px;
+    left: 575px;
+    padding-top: 200px;
 }
+buttonsTop #back .text1{
 
-/* Add a background color on hover */
-.column a:hover {
-    background-color: #ddd;
+
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 24px;
+
+
+
+    color: #000000;
 }
+buttonsTop #profile img{
 
-/* Clear floats after the columns */
-.row:after {
-    content: "";
-    display: table;
-    clear: both;
+    width: 100px;
+    height: 100px;
+    border-right: 1px solid #000000;
+    border-radius: 100px;
+
 }
+buttonsTop #profile .text1{
 
-.btn-group button {
-    background-color: #4CAF50; /* Green background */
-    border: 1px solid green; /* Green border */
-    color: white; /* White text */
-    padding: 10px 24px; /* Some padding */
-    cursor: pointer; /* Pointer/hand icon */
+    width: 89px;
+    height: 120px;
+    right: 162px;
+    top: -17px;
 
-    display: block; /* Make the buttons appear below each other */
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 24px;
+
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
 }
+buttonsTop #profile .text2{
 
-.btn-group button:not(:last-child) {
-    border-right:  none; /* Prevent double borders */
+    width: 89px;
+    height: 80px;
+    right: 162px;
+    top: -17px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+
+    align-items: center;
+    text-align: center;
+
+    color: #000000;
 }
-
-/* Add a background color on hover */
-.btn-group button:hover {
-    background-color: #3e8e41;
+buttonsLeft .invisible{
+    left: -630px;
 }
+buttonsTop .invisible{
+    top: -1400px;
+}
+buttonsLeft .full:not(.invisible){
+    left: 0px;
+}
+buttonsTop .full  {
+    top: 180px;
+}
+buttonsCentr .box{
+    transition: 0.8s;
+    justify-content: center;
+    box-sizing: border-box;
+    position: absolute;
 
+    background: #D9D9D9;
+    border-right: 2px solid #000000;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 100px 100px 100px 100px;
+}
+buttonsCentr #remaile:not(.full) {
 
+    width: 470px;
+    height: 90px;
+    left: 540px;
+    top: -1005px;
+}
+buttonsCentr #rename:not(.full){
 
+    width: 475px;
+    height: 90px;
+    left: 540px;
+    top: -605px;
+}
+buttonsCentr #relogo:not(.full){
 
+    width: 470px;
+    height: 90px;
+    left: 540px;
+    top: -200px;
+}
+buttonsCentr #remaile {
 
+    width: 470px;
+    height: 90px;
+    left: 540px;
+    top: 205px;
+}
+buttonsCentr #rename {
 
+    width: 475px;
+    height: 90px;
+    left: 540px;
+    top: 305px;
+}
+buttonsCentr #relogo {
 
+    width: 470px;
+    height: 90px;
+    left: 540px;
+    top: 405px;
+}
+buttonsCentr .text1{
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 15px;
+    display: flex;
 
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: #000000;
+}
+tablic{
+    position: absolute;
+    width: 1440px;
+    height: 462px;
+    left: 0px;
+    top: 338px; 
+}
