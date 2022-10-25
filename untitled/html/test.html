@@ -2,38 +2,91 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="css\mega.css" rel="stylesheet" type="text/css">
     <link href="css\test.css" rel="stylesheet" type="text/css">
     <link href="js\test.js" rel="stylesheet" type="text/xml">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
 
     </style>
 </head>
 <body>
-<div class="btn-group">
-    <button>Zakaz List</button>
-    <button>Masters</button>
-    <button>Departures</button>
-</div>
+    <buttonsLeft    >
+        <button onclick="showHideBtn2('#zakaz')" class="box" id="zakaz"><img src="css\dialog1.jpg" alt=""><div class="text">Заказы</div></button>
+        <button onclick="showHideBtn2('#viezd')" class="box" id="viezd"><img src="css\lamba1.png" alt=""><div class="text">Выезды</div></button>
+        <button onclick="showHideBtn2('#otchet')" class="box" id="otchet"><img src="css\Otchet1.jpg" alt=""><div class="text">Отчёты</div></button>
+        <button onclick="showHideBtn2('#masters')" class="box" id="masters"><img src="css\medium.jpg" alt=""><div class="text">Мастера</div></button>
+    </buttonsLeft>
+    <buttonsTop    >
+        <button onclick="showHideBtn1()" class="box invisible" id="back"><div class="text1">Back</div></button>
+        <button onclick="showHideBtn1()" class="box" id="profile"><div class="text1">MistFors@mail.ru</div><div class="text2">MistFors</div><img src="css\Profile.PNG" alt=""></button>
+    </buttonsTop>
+    <buttonsCentr>
+        <button onclick="showHideBtn1()" class="box" id="remaile"><div class="text1">Изменить почту</div></button>
+        <button onclick="showHideBtn1()" class="box" id="rename"><div class="text1">Изменить ФИО</div></button>
+        <button onclick="showHideBtn1()" class="box" id="relogo"><div class="text1">Изменить иконку</div></button>
+    </buttonsCentr>
 
+<script type="text/javascript">
+    btn = document.createElement('BUTTON');
+    btn.id='cm3';
+    btn.onclick=function (){
+
+        const tom = {
+            name: "Tom",
+            age: 37
+        };
+// кодируем объект в формат json
+        const data = JSON.stringify(tom);
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("POST", "/user");
+        xhr.setRequestHeader("Content-Type", "application/json");
+
+        xhr.onload = () => {
+            if (xhr.status == 200) {
+                const user = JSON.parse(xhr.responseText)
+                console.log(user.name, "-", user.age);
+                btn.textContent=user.name;
+            } else {
+                console.log("Server response: ", xhr.statusText);
+            }
+        };
+        xhr.send(data);
+    }
+    btn.textContent='1111';
+    document.body.appendChild(btn);
+
+</script>
 
 <!--<p><div class="loader"></div></p>-->
-<div class="bg-img">
-    <form action="/action_page.php">
-        <div class="container">
-            <h1>Login</h1>
 
-            <label for="email"><b>Email</b></label>
-            <input type="text" placeholder="Enter Email" name="email" required>
-
-            <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
-
-            <button type="submit" class="btn">Login</button>
-        </div>
-    </form>
-</div>
 <script>
+function profile(button)
+{
+button.className="zzz";
+}
+function showHideBtn1() {
+    document.querySelector('#zakaz').classList.toggle('invisible');
+    document.querySelector('#viezd').classList.toggle('invisible');
+    document.querySelector('#otchet').classList.toggle('invisible');
+    document.querySelector('#masters').classList.toggle('invisible');
+    document.querySelector('#profile').classList.toggle('full');
+    document.querySelector('#remaile').classList.toggle('full');
+    document.querySelector('#rename').classList.toggle('full');
+    document.querySelector('#relogo').classList.toggle('full');
+    document.querySelector('#back').classList.toggle('invisible');
+};
+function showHideBtn2(fff) {
+    document.querySelector('#profile').classList.toggle('invisible');
+    document.querySelector('#zakaz').classList.toggle('invisible');
+    document.querySelector('#viezd').classList.toggle('invisible');
+    document.querySelector('#otchet').classList.toggle('invisible');
+    document.querySelector('#masters').classList.toggle('invisible');
+    document.querySelector(fff).classList.toggle('invisible');
+    document.querySelector(fff).classList.toggle('full');
+};
 
 </script>
 
