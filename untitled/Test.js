@@ -1,19 +1,58 @@
 var http =require("http");
 var fs =require("fs");
 var path =require("path");
+var mysql= require("mysql");
+//const test = require("TestModel.js");
+const { MongoClient } =require('mongodb');
+const uri ='mongodb+srv://mistfors:yjdbrjd9271@cluster0.lemukar.mongodb.net/?retryWrites=true&w=majority';
+const client=new MongoClient(uri);
+client.connect();
+async function start(){
+
+
+
+}
+start();
 //var html=require("node:test.html")
 //let fileContent = fs.readFileSync("test.html", "utf8");
     //<button name="send">Отправить</button>
 http.createServer(function (request,response)
 {
+
     //response.setHeader("Content-Type", "text/html");
     if (request.url==='/')
     {
-        sendRes('html\\test.html','text/html',response);
+         sendRes('html\\test.html','text/html',response);
 
     }
-    else if(/\/uploads\/[^\/]+$/.test(request.url)&& request.method==='POST'){
-        //sendRes('mega.css','text/css',response);
+    else
+    if(request.url == "/add"){
+        //add();
+        add(request,response,"test");
+        //add(request,response,"test");
+        //save(request,response,test)
+    }
+    if(request.url == "/take"){
+        //add();
+        take(request,response,"test");
+        //save(request,response,test)
+    }
+
+    else if(/\/uploads\/[^\/]+$/.test(request.url)&& request.method==='POST') {
+        {
+            //sendRes('mega.css','text/css',response);
+            let body = '';
+            request.on('data', chunk => {
+                body += chunk.toString();
+            });
+            request.on('end', () => {
+                console.log(body);
+                let params = parse(body);
+                console.log(params);
+                console.log(params.hi);
+
+            });
+        }
     }
     else
         sendRes(request.url,getcontentType(request.url),response);
@@ -59,4 +98,115 @@ function getcontentType(url)
             return "application/octate-stream";
 
     }
+}
+async function wait(request,response){
+        const buffers = [];
+        for await (const chunk of request) {
+            buffers.push(chunk);
+        }
+
+        const data = Buffer.concat(buffers).toString();
+        const user = JSON.parse(data); // парсим строку в json
+
+        // изменяем данные полученного объекта
+
+        const db = client.db("usersdb");
+        const collection = db.collection("users1");
+        collection.insertOne(user, function(err, result){
+
+        if(err){
+            return console.log(err);
+        }
+        console.log(result);
+        console.log(user);
+
+
+    });
+        // отправляем измененый объект обратно клиенту
+        response.end(JSON.stringify(user));
+}
+
+async function save(request,response,todo){
+    await todo.save()
+}
+async function wait(request,response){
+    const buffers = [];
+    for await (const chunk of request) {
+        buffers.push(chunk);
+    }
+
+    const data = Buffer.concat(buffers).toString();
+    const user = JSON.parse(data); // парсим строку в json
+
+    // изменяем данные полученного объекта
+
+    const db = client.db("usersdb");
+    const collection = db.collection("users1");
+    collection.insertOne(user, function(err, result){
+
+        if(err){
+            return console.log(err);
+        }
+        console.log(result);
+        console.log(user);
+
+
+    });
+    // отправляем измененый объект обратно клиенту
+    response.end(JSON.stringify(user));
+}
+async function add(request,response, colletion){
+
+    const buffers = [];
+    for await (const chunk of request) {
+        buffers.push(chunk);
+    }
+
+    const data = Buffer.concat(buffers).toString();
+    const user = JSON.parse(data); // парсим строку в json
+
+    // изменяем данные полученного объекта
+
+    const db = client.db("usersdb");
+    const collection = db.collection(colletion);
+    collection.insertOne(user, function(err, result){
+
+        if(err){
+            return console.log(err);
+        }
+        console.log(result);
+        console.log(user);
+
+
+    });
+    // отправляем измененый объект обратно клиенту
+    response.end(JSON.stringify(user));
+}
+async function take(request,response, colletion){
+
+    const buffers = [];
+    for await (const chunk of request) {
+        buffers.push(chunk);
+    }
+
+    const data = Buffer.concat(buffers).toString();
+    const user = JSON.parse(data); // парсим строку в json
+
+    // изменяем данные полученного объекта
+
+    const db = client.db("usersdb");
+    const collection = db.collection(colletion);
+    let cursor=collection.find();
+    cursor.toArray(function(err, result){
+
+        if(err){
+            return console.log(err);
+        }
+
+
+
+        response.end(JSON.stringify(result));
+    });
+    // отправляем измененый объект обратно клиенту
+
 }
