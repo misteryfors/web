@@ -2,242 +2,184 @@
 body{
     background-image:url("carbon.jpg");
 }
-buttonsLeft .box:hover:not(.invisible,.full){
-    left: 0px;
-}
-buttonsLeft .box img{
-    box-sizing: border-box;
-    width: 315px;
-    height: 85px;
-    border-right: 1px solid #000000;
-    border-radius: 100px;
-    object-fit: cover;
-}
-buttonsLeft .box .text{
+.tablic{
+    transition: 1.8s;
 
-
-    width: 315px;
-    height: 90px;
-    left: 0px;
-    top: 135px;
-
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 15px;
-    display: flex;
-
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    color: #000000;
-}
-buttonsLeft .box{
-    transition: 0.5s;
-    display: flex;
-    justify-content: center;
-    box-sizing: border-box;
     position: absolute;
-    left: -315px;
+
     background: #D9D9D9;
-    border-right: 2px solid #000000;
-    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 100px 100px 100px 100px;
-}
-buttonsLeft #zakaz{
 
-    width: 630px;
-    height: 90px;
-
-    top: 135px;
-}
-buttonsLeft #viezd{
-
-    width: 630px;
-    height: 90px;
-
-    top: 235px;
-}
-buttonsLeft #otchet{
-
-    width: 630px;
-    height: 90px;
-
-    top: 335px;
-}
-buttonsLeft #masters{
-
-    width: 630px;
-    height: 90px;
-
-    top: 435px;
-}
-buttonsTop .box:hover:not(.invisible,.full){
-top:-100px;
-}
-buttonsTop .box{
-    transition: 0.8s;
-    display: block;
-    justify-content: center;
-    box-sizing: border-box;
-    position: absolute;
+    width: 100%;
+    left: 0px;
     top: -208px;
-    background: #D9D9D9;
-    border-radius: 100px 100px 100px 100px;
-}
-buttonsTop #profile{
-    width: 116px;
-    height: 343px;
-    left: 1175px;
-    padding-top: 30px;
-}
-buttonsTop #back{
-    width: 400px;
-    height: 300px;
-    left: 575px;
-    padding-top: 200px;
-}
-buttonsTop #back .text1{
-
-
-
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 24px;
-
-
-
-    color: #000000;
-}
-buttonsTop #profile img{
-
-    width: 100px;
-    height: 100px;
-    border-right: 1px solid #000000;
-    border-radius: 100px;
 
 }
-buttonsTop #profile .text1{
+.tablic rows{
+    transition: 1.9s;
 
-    width: 89px;
-    height: 120px;
-    right: 162px;
-    top: -17px;
+    position: absolute;
+    top: 0px;
 
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 13px;
-    line-height: 24px;
+    top:0px;
+    height: 100%;
+    width: 100%;
 
-    align-items: center;
-    text-align: center;
-
-    color: #000000;
 }
-buttonsTop #profile .text2{
+.tablic fon{
+    display: flex;
 
-    width: 89px;
-    height: 80px;
-    right: 162px;
-    top: -17px;
-
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 20px;
-    line-height: 24px;
-
-    align-items: center;
-    text-align: center;
-
-    color: #000000;
-}
-buttonsLeft .invisible{
-    left: -630px;
-}
-buttonsTop .invisible{
-    top: -1400px;
-}
-buttonsLeft .full:not(.invisible){
-    left: 0px;
-}
-buttonsTop .full  {
-    top: 180px;
-}
-buttonsCentr .box{
-    transition: 0.8s;
-    justify-content: center;
-    box-sizing: border-box;
+    transition: 1.8s;
     position: absolute;
 
     background: #D9D9D9;
-    border-right: 2px solid #000000;
+
+    width: 100%;
+    height: 100%;
+
+}
+.tablic:not(.invisible){
+    top: 438px;
+    height: 462px;
+}
+.tablic .colum{
+
+    filter:  opacity(80%);
+    width:33.33%;
+    height: 100%;
+    display: flex;
+}
+.tablic .colum columname{
+
+    color: #3498db;
+    width:100%;
+    height: 100%;
+
+}
+.tablic .row{
+
+
+    box-sizing: border-box;
+    width: 100%;
+    max-height:140px;
+    height: 100%;
+
+}
+.tablic .row .item:not(columname){
+
+    filter:  opacity(100%);
+    background-color: #777778;
+    width: 100%;
+    height: 71.4%;
+    box-sizing: border-box;
+    border-radius: 100px 100px 100px 100px;
+    border: 0 solid #5b5b5b;
+
+
+}
+.tablic .row .item .columname{
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+    filter:  opacity(100%);
+    background-color: #e0e0e0;
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    border-radius: 100px 100px 0px 0px;
+    border: 0px solid #5b5b5b;
+    justify-content: center;
+
+
+}
+.tablic .row .item .tag1{
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+    filter:  opacity(100%);
+    background-color: #3498db;
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    border-radius: 100px 0px 0px 100px;
+    border: 0px solid #5b5b5b;
+    justify-content: center;
+
+
+}
+.tablic .row .item .tag2{
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+    filter:  opacity(100%);
+    background-color: #3498db;
+    width: 33.33%;
+    height: 100%;
+    float: left;
+    border-radius: 0px 0px 0px 0px;
+    border: 0px solid #5b5b5b;
+    justify-content: center;
+
+
+}
+.tablic .row .item .tag3{
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    display: flex;
+    float: left;
+    filter:  opacity(100%);
+    background-color: #3498db;
+    width: 33.33%;
+    height: 100%;
+    border-radius: 0px 100px 100px 0px;
+    border: 0px solid #5b5b5b;
+    justify-content: center;
+
+
+}
+.tablic .row .slot{
+    position: absolute;
+    background-color: #d2d2d2;
+
+    filter:  opacity(30%);
+    width: 100%;
+    height: 100%;
+
+
+}
+.tablic.invisible{
+    left: -100%;
+    top: 638px;
+    height: 0px;
+}
+.slot{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+div.draggable{
+    transition: 0s;
+
+    box-sizing: border-box;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    height: 100%;
+    max-height: 100px;
+    width: 100%;
+    min-height: 0px;
+    background: #D9D9D9;
+    border-right: 0px solid #000000;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 100px 100px 100px 100px;
 }
-buttonsCentr #remaile:not(.full) {
+item.draggable button{
 
-    width: 470px;
-    height: 90px;
-    left: 540px;
-    top: -1005px;
 }
-buttonsCentr #rename:not(.full){
+item.draggable .text{
 
-    width: 475px;
-    height: 90px;
-    left: 540px;
-    top: -605px;
-}
-buttonsCentr #relogo:not(.full){
 
-    width: 470px;
-    height: 90px;
-    left: 540px;
-    top: -200px;
-}
-buttonsCentr #remaile {
-
-    width: 470px;
-    height: 90px;
-    left: 540px;
-    top: 205px;
-}
-buttonsCentr #rename {
-
-    width: 475px;
-    height: 90px;
-    left: 540px;
-    top: 305px;
-}
-buttonsCentr #relogo {
-
-    width: 470px;
-    height: 90px;
-    left: 540px;
-    top: 405px;
-}
-buttonsCentr .text1{
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 32px;
-    line-height: 15px;
-    display: flex;
-
-    align-items: center;
-    text-align: center;
-    justify-content: center;
-    color: #000000;
-}
-tablic{
-    position: absolute;
-    width: 1440px;
-    height: 462px;
-    left: 0px;
-    top: 338px; 
 }
