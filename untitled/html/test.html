@@ -5,13 +5,21 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <link href="css\mega.css" rel="stylesheet" type="text/css">
     <link href="css\test.css" rel="stylesheet" type="text/css">
+    <link href="css\buttonsLeft.css" rel="stylesheet" type="text/css">
+    <link href="css\buttonsTop.css" rel="stylesheet" type="text/css">
+    <link href="css\buttonsCentr.css" rel="stylesheet" type="text/css">
+    <link href="css\buttonsRight.css" rel="stylesheet" type="text/css">
     <link href="js\test.js" rel="stylesheet" type="text/xml">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <script src="js\drag.js"></script>
     <style>
 
     </style>
 </head>
 <body>
+<input id="in1">
+<input id="in2">
     <buttonsLeft    >
         <button onclick="showHideBtn2('#zakaz')" class="box" id="zakaz"><img src="css\dialog1.jpg" alt=""><div class="text">Заказы</div></button>
         <button onclick="showHideBtn2('#viezd')" class="box" id="viezd"><img src="css\lamba1.png" alt=""><div class="text">Выезды</div></button>
@@ -26,8 +34,26 @@
         <button onclick="showHideBtn1()" class="box" id="remaile"><div class="text1">Изменить почту</div></button>
         <button onclick="showHideBtn1()" class="box" id="rename"><div class="text1">Изменить ФИО</div></button>
         <button onclick="showHideBtn1()" class="box" id="relogo"><div class="text1">Изменить иконку</div></button>
+        <button onclick="new1()" class="box" id="new"><div class="text1">new</div></button>
     </buttonsCentr>
 
+<tablic class="tablic invisible" id="tablica">
+
+    <fon id="fons">
+        <div class="colum" style="background-color: #777778"><div class="slot droppable"><div class="draggable" id="draggable-1" draggable="true" ondragstart="onDragStart(event)"><div class="text">aaa</div><button onclick="op()">zzz</button></div><div class="draggable" id="draggable-2" draggable="true" ondragstart="onDragStart(event)">bbb</div><div class="draggable" id="draggable-3" draggable="true" ondragstart="onDragStart(event)">ccc</div></div></div>
+        <div class="colum" style="background-color: #a6a6a7"><div class="slot droppable"></div></div>
+        <div class="colum" style="background-color: #c6c6c7"><div class="slot droppable"></div></div>
+    </fon>
+    <buttonsRight    >
+        <form class="box invisible" id="redzakaz"><div class="text">Заказы</div><input><input><input></form>
+        <form class="box invisible" id="redviezd"><div class="text">Выезды</div></form>
+        <form class="box invisible" id="redotchet"><div class="text">Отчёты</div></form>
+        <form class="box invisible" id="redmasters"><div class="text">Мастера</div></form>
+    </buttonsRight>
+
+
+
+</tablic>
 <script type="text/javascript">
     btn = document.createElement('BUTTON');
     btn.id='cm3';
@@ -41,14 +67,14 @@
         const data = JSON.stringify(tom);
         const xhr = new XMLHttpRequest();
 
-        xhr.open("POST", "/user");
+        xhr.open("POST", "/add");
         xhr.setRequestHeader("Content-Type", "application/json");
 
         xhr.onload = () => {
             if (xhr.status == 200) {
                 const user = JSON.parse(xhr.responseText)
-                console.log(user.name, "-", user.age);
-                btn.textContent=user.name;
+                console.log(user);
+                //btn.textContent=user.name;
             } else {
                 console.log("Server response: ", xhr.statusText);
             }
@@ -63,6 +89,38 @@
 <!--<p><div class="loader"></div></p>-->
 
 <script>
+    let id=4;
+function onload(){
+    send("/add",
+        {
+            id: document.querySelector('#in1').value,
+            tag: document.querySelector('#in1').value
+        });
+}
+function op(el){
+    el.parentId
+}
+
+
+
+
+    DragManager.onDragCancel = function(dragObject) {
+        dragObject.avatar.rollback();
+    };
+
+    DragManager.onDragEnd = function(dragObject, dropElem) {
+        dragObject.elem.style= "";
+        dropElem.appendChild(dragObject.elem);
+    };
+
+
+
+
+
+
+
+
+
 function profile(button)
 {
 button.className="zzz";
@@ -86,7 +144,54 @@ function showHideBtn2(fff) {
     document.querySelector('#masters').classList.toggle('invisible');
     document.querySelector(fff).classList.toggle('invisible');
     document.querySelector(fff).classList.toggle('full');
+
+    if (fff=='#viezd')
+    {
+        document.querySelector('#tablica').classList.toggle('invisible');
+        document.querySelector('#new').classList.toggle('full');
+    }
 };
+async function new1() {
+// клонируем элемент articleDiv
+    newslot(document.querySelector('#in1').value,document.querySelector('#in2').value)
+    let test={
+        id: document.querySelector('#in2').value,
+        tag: document.querySelector('#in1').value
+    }
+    let z=await send("/take",
+        {
+        test
+        });
+    console.log(z);
+};
+function send(url,json){
+// кодируем объект в формат json
+        const data = JSON.stringify(json);
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("POST", url);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onload = () => {
+            if (xhr.status == 200) {
+                const user = JSON.parse(xhr.responseText)
+                console.log(user);
+                return JSON.parse(xhr.responseText);
+                //btn.textContent=user.name;
+            } else {
+                console.log("Server response: ", xhr.statusText);
+            }
+        };
+        xhr.send(data);
+
+}
+function newslot(name,id){
+    let newArticleDiv = document.createElement("div")
+    newArticleDiv.textContent=name;
+    newArticleDiv.id=id;
+    newArticleDiv.draggable="true";
+    newArticleDiv.className='draggable';
+    document.querySelector('#fons .slot').appendChild(newArticleDiv);
+}
 
 </script>
 
