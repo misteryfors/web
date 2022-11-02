@@ -51,14 +51,28 @@ buttonsCentr #relogo {
     left: 540px;
     top: 405px;
 }
-buttonsCentr #new {
+buttonsCentr #new1 {
 
     width: 470px;
     height: 90px;
     left: 540px;
     top: 305px;
 }
-buttonsCentr #new:not(.full){
+buttonsCentr #new2:not(.full){
+
+    width: 470px;
+    height: 90px;
+    left: 540px;
+    top: -200px;
+}
+buttonsCentr #new2 {
+
+    width: 470px;
+    height: 90px;
+    left: 540px;
+    top: 205px;
+}
+buttonsCentr #new1:not(.full){
 
     width: 470px;
     height: 90px;
