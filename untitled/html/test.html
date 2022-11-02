@@ -10,8 +10,6 @@
     <link href="css\buttonsCentr.css" rel="stylesheet" type="text/css">
     <link href="css\buttonsRight.css" rel="stylesheet" type="text/css">
     <link href="js\test.js" rel="stylesheet" type="text/xml">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="style.css" />
     <script src="js\drag.js"></script>
     <style>
 
@@ -34,7 +32,8 @@
         <button onclick="showHideBtn1()" class="box" id="remaile"><div class="text1">Изменить почту</div></button>
         <button onclick="showHideBtn1()" class="box" id="rename"><div class="text1">Изменить ФИО</div></button>
         <button onclick="showHideBtn1()" class="box" id="relogo"><div class="text1">Изменить иконку</div></button>
-        <button onclick="new1()" class="box" id="new"><div class="text1">new</div></button>
+        <button onclick="new1()" class="box" id="new1"><div class="text1">new</div></button>
+        <button onclick="new2()" class="box" id="new2"><div class="text1">new</div></button>
     </buttonsCentr>
 
 <tablic class="tablic invisible" id="tablica">
@@ -148,7 +147,8 @@ function showHideBtn2(fff) {
     if (fff=='#viezd')
     {
         document.querySelector('#tablica').classList.toggle('invisible');
-        document.querySelector('#new').classList.toggle('full');
+        document.querySelector('#new1').classList.toggle('full');
+        document.querySelector('#new2').classList.toggle('full');
     }
 };
 async function new1() {
@@ -158,38 +158,88 @@ async function new1() {
         id: document.querySelector('#in2').value,
         tag: document.querySelector('#in1').value
     }
-    let z=await send("/take",
+    send1("/add",
         {
-        test
+            id: document.querySelector('#in2').value,
+            tag: document.querySelector('#in1').value
         });
-    console.log(z);
+
+
 };
-function send(url,json){
+async function new2() {
+// клонируем элемент articleDiv
+        send2("/take",
+            {
+                id: document.querySelector('#in2').value,
+                tag: document.querySelector('#in1').value
+            });
+
+
+    };
+function send2(url,json){
 // кодируем объект в формат json
         const data = JSON.stringify(json);
         const xhr = new XMLHttpRequest();
 
         xhr.open("POST", url);
         xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(data);
         xhr.onload = () => {
             if (xhr.status == 200) {
-                const user = JSON.parse(xhr.responseText)
+                let user =  JSON.parse(xhr.responseText)
                 console.log(user);
-                return JSON.parse(xhr.responseText);
-                //btn.textContent=user.name;
+                for(let elm of user)
+                {
+                    newslot(elm.tag,elm.id)
+                }
+
             } else {
                 console.log("Server response: ", xhr.statusText);
             }
         };
-        xhr.send(data);
+
+
 
 }
+    function send1(url,json){
+// кодируем объект в формат json
+        const data = JSON.stringify(json);
+        const xhr = new XMLHttpRequest();
+
+        xhr.open("POST", url);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(data);
+        xhr.onload = () => {
+            if (xhr.status == 200) {
+                let user =  JSON.parse(xhr.responseText)
+                console.log(user);
+
+            } else {
+                console.log("Server response: ", xhr.statusText);
+            }
+        };
+
+
+
+    }
 function newslot(name,id){
     let newArticleDiv = document.createElement("div")
     newArticleDiv.textContent=name;
     newArticleDiv.id=id;
     newArticleDiv.draggable="true";
     newArticleDiv.className='draggable';
+    let tab= document.querySelector('.tablic:not(.invisible)');
+    let fons=document.querySelector('#fons');
+    let max=0;
+    for(let elm of fons.children){
+        for(let elm1 of elm.children) {
+            if (elm1.children.length>max)
+                max=elm1.children.length;
+        }
+    }
+    max+=4;
+    //console.log(tab.children.length*100);
+    tab.style.height=max*100+"px";
     document.querySelector('#fons .slot').appendChild(newArticleDiv);
 }
 
