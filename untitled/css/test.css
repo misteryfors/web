@@ -163,10 +163,11 @@ body{
 div.draggable{
     transition: 0s;
 
-    box-sizing: border-box;
-    align-items: center;
-    text-align: center;
+    display: flex;
+    /* Выравниваем элементы по горизонтали */
     justify-content: center;
+    /* Выравниваем элементы по вертикали */
+    align-items: center;
     height: 100%;
     max-height: 100px;
     width: 100%;
@@ -176,7 +177,7 @@ div.draggable{
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 100px 100px 100px 100px;
 }
-item.draggable button{
+div.draggable button{
 
 }
 item.draggable .text{

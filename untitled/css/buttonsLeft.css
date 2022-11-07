@@ -30,6 +30,7 @@ buttonsLeft .box .text{
     color: #000000;
 }
 buttonsLeft .box{
+    z-index: 9998;
     transition: 0.5s;
     display: flex;
     justify-content: center;

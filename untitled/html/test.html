@@ -34,17 +34,19 @@
         <button onclick="showHideBtn1()" class="box" id="relogo"><div class="text1">Изменить иконку</div></button>
         <button onclick="new1()" class="box" id="new1"><div class="text1">new</div></button>
         <button onclick="new2()" class="box" id="new2"><div class="text1">new</div></button>
+        <button onclick="new3()" class="box" id="new3"><div class="text1">new</div></button>
+        <button onclick="new4()" class="box" id="new4"><div class="text1">new</div></button>
     </buttonsCentr>
 
 <tablic class="tablic invisible" id="tablica">
 
     <fon id="fons">
-        <div class="colum" style="background-color: #777778"><div class="slot droppable"><div class="draggable" id="draggable-1" draggable="true" ondragstart="onDragStart(event)"><div class="text">aaa</div><button onclick="op()">zzz</button></div><div class="draggable" id="draggable-2" draggable="true" ondragstart="onDragStart(event)">bbb</div><div class="draggable" id="draggable-3" draggable="true" ondragstart="onDragStart(event)">ccc</div></div></div>
+        <div class="colum" style="background-color: #777778"><div class="slot droppable"></div></div>
         <div class="colum" style="background-color: #a6a6a7"><div class="slot droppable"></div></div>
         <div class="colum" style="background-color: #c6c6c7"><div class="slot droppable"></div></div>
     </fon>
     <buttonsRight    >
-        <form class="box invisible" id="redzakaz"><div class="text">Заказы</div><input><input><input></form>
+        <form class="box invisible" id="redzakaz"><div class="text">Заказы</div></form>
         <form class="box invisible" id="redviezd"><div class="text">Выезды</div></form>
         <form class="box invisible" id="redotchet"><div class="text">Отчёты</div></form>
         <form class="box invisible" id="redmasters"><div class="text">Мастера</div></form>
@@ -88,8 +90,9 @@
 <!--<p><div class="loader"></div></p>-->
 
 <script>
-    let id=4;
-function onload(){
+    let Itemid;
+    let Table;
+    function onload(){
     send("/add",
         {
             id: document.querySelector('#in1').value,
@@ -146,7 +149,9 @@ function showHideBtn2(fff) {
 
     if (fff=='#viezd')
     {
-        document.querySelector('#tablica').classList.toggle('invisible');
+        new2();
+        Table=document.querySelector('#tablica');
+        Table.classList.toggle('invisible');
         document.querySelector('#new1').classList.toggle('full');
         document.querySelector('#new2').classList.toggle('full');
     }
@@ -158,8 +163,10 @@ async function new1() {
         id: document.querySelector('#in2').value,
         tag: document.querySelector('#in1').value
     }
+    //var now = new Date();
     send1("/add",
         {
+            //time: now.getFullYear()+"."+now.getMonth(),
             id: document.querySelector('#in2').value,
             tag: document.querySelector('#in1').value
         });
@@ -168,7 +175,33 @@ async function new1() {
 };
 async function new2() {
 // клонируем элемент articleDiv
-        send2("/take",
+        send3("/take",
+            {
+                id: document.querySelector('#in2').value,
+                tag: document.querySelector('#in1').value
+            },
+            function (user){
+                let slot =document.querySelector('#fons .slot')
+                while (slot.firstChild) {
+                    slot.removeChild(slot.firstChild);
+                }
+                for(let elm of user)
+                {
+                    newslot(elm.tag,elm.id)
+                }
+            }
+            );
+
+
+    };
+async function new3() {
+// клонируем элемент articleDiv
+        newslot(document.querySelector('#in1').value,document.querySelector('#in2').value)
+        let test={
+            id: document.querySelector('#in2').value,
+            tag: document.querySelector('#in1').value
+        }
+        send1("/add",
             {
                 id: document.querySelector('#in2').value,
                 tag: document.querySelector('#in1').value
@@ -176,7 +209,22 @@ async function new2() {
 
 
     };
-function send2(url,json){
+async function new4() {
+// клонируем элемент articleDiv
+        newslot(document.querySelector('#in1').value,document.querySelector('#in2').value)
+        let test={
+            id: document.querySelector('#in2').value,
+            tag: document.querySelector('#in1').value
+        }
+        send1("/add",
+            {
+                id: document.querySelector('#in2').value,
+                tag: document.querySelector('#in1').value
+            });
+
+
+    };
+    function send3(url,json,func){
 // кодируем объект в формат json
         const data = JSON.stringify(json);
         const xhr = new XMLHttpRequest();
@@ -188,10 +236,8 @@ function send2(url,json){
             if (xhr.status == 200) {
                 let user =  JSON.parse(xhr.responseText)
                 console.log(user);
-                for(let elm of user)
-                {
-                    newslot(elm.tag,elm.id)
-                }
+                func(user);
+                //document.querySelector('#redzakaz input').value=user[0].tag
 
             } else {
                 console.log("Server response: ", xhr.statusText);
@@ -200,7 +246,7 @@ function send2(url,json){
 
 
 
-}
+    }
     function send1(url,json){
 // кодируем объект в формат json
         const data = JSON.stringify(json);
@@ -222,8 +268,72 @@ function send2(url,json){
 
 
     }
+    function remove(item){
+        send1("/delet",
+            {
+                id: item.id
+            });
+        document.querySelector('#fons .slot').removeChild(item);
+    }
+    function saveInfo(id1,item){
+        send1("/update",
+            {
+                id1:id1,
+                id: item.id,
+                tag:item.tag
+            },);
+    }
+    function moreInfo(item){
+        send3("/take",
+            {
+                id: item.id
+            },
+            function (user){let slot =document.querySelector('#redzakaz')
+                while (slot.firstChild) {
+                slot.removeChild(slot.firstChild);
+                }
+                Itemid=item.id;
+                let text = document.createElement("div")
+                text.textContent='Заказ '+user[0].id;
+                text.className='text';
+                let but = document.createElement("div")
+                let button = document.createElement("button")
+                button.onclick=function (){
+                    saveInfo(Itemid,{
+                        id:document.querySelector('#id').value,
+                        tag:document.querySelector('#tag').value
+                    })
+                    new2();
+                    return false;
+                }
+
+                button.textContent="Сохранить"
+                but.appendChild(button);
+                text.textContent='Заказ '+user[0].id;
+                text.className='text';
+                slot.appendChild(text)
+
+                for (var elm of user) {
+                    for (var key in elm) {
+                        if (key!="_id")
+                        newinput(elm[key],[key])
+                    }
+                }
+                slot.appendChild(but)
+            }
+            );
+        document.querySelector('#redzakaz').classList.toggle('invisible');
+    }
 function newslot(name,id){
     let newArticleDiv = document.createElement("div")
+    let button1 = document.createElement("button")
+    button1.textContent='delet';
+    button1.className='delet';
+    button1.onclick= function(){remove(this.parentNode)};
+    let button2 = document.createElement("button")
+    button2.textContent='change';
+    button2.className='change';
+    button2.onclick= function(){moreInfo(this.parentNode)};
     newArticleDiv.textContent=name;
     newArticleDiv.id=id;
     newArticleDiv.draggable="true";
@@ -239,9 +349,23 @@ function newslot(name,id){
     }
     max+=4;
     //console.log(tab.children.length*100);
-    tab.style.height=max*100+"px";
+    Table.style.height=max*100+"px";
+    newArticleDiv.appendChild(button1);
+    newArticleDiv.appendChild(button2);
     document.querySelector('#fons .slot').appendChild(newArticleDiv);
 }
+    function newinput(tags,id){
+        let newArticleDiv1 = document.createElement("div")
+        newArticleDiv1.textContent=id+" :";
+        newArticleDiv1.style='font-size: 32px;'
+        let newArticleDiv = document.createElement("input")
+        newArticleDiv.value=tags;
+        newArticleDiv.id=id;
+        newArticleDiv1.appendChild(newArticleDiv);
+        //console.log(tab.children.length*100);
+        document.querySelector('#redzakaz').appendChild(newArticleDiv1);
+
+    }
 
 </script>
 

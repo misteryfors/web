@@ -32,9 +32,24 @@ http.createServer(function (request,response)
         //add(request,response,"test");
         //save(request,response,test)
     }
+    else
     if(request.url == "/take"){
         //add();
         take(request,response,"test");
+        //save(request,response,test)
+    }
+    else
+    if(request.url == "/delet"){
+        //add();
+        delet(request,response,"test");
+        //add(request,response,"test");
+        //save(request,response,test)
+    }
+    else
+    if(request.url == "/update"){
+        //add();
+        update(request,response,"test");
+        //add(request,response,"test");
         //save(request,response,test)
     }
 
@@ -196,7 +211,8 @@ async function take(request,response, colletion){
 
     const db = client.db("usersdb");
     const collection = db.collection(colletion);
-    let cursor=collection.find();
+    console.log(user);
+    let cursor=collection.find(user.id ==''?'': {id:user.id});
     cursor.toArray(function(err, result){
 
         if(err){
@@ -210,3 +226,59 @@ async function take(request,response, colletion){
     // отправляем измененый объект обратно клиенту
 
 }
+async function delet(request,response, colletion){
+
+    const buffers = [];
+    for await (const chunk of request) {
+        buffers.push(chunk);
+    }
+
+    const data = Buffer.concat(buffers).toString();
+    const user = JSON.parse(data); // парсим строку в json
+
+    // изменяем данные полученного объекта
+
+    const db = client.db("usersdb");
+    const collection = db.collection(colletion);
+    collection.deleteOne({id:user.id}, function(err, result){
+
+        if(err){
+            return console.log(err);
+        }
+        console.log(result);
+        console.log(user);
+
+
+    });
+    // отправляем измененый объект обратно клиенту
+    response.end(JSON.stringify(user));
+}
+async function update(request,response, colletion){
+
+    const buffers = [];
+    for await (const chunk of request) {
+        buffers.push(chunk);
+    }
+
+    const data = Buffer.concat(buffers).toString();
+    const user = JSON.parse(data); // парсим строку в json
+
+    // изменяем данные полученного объекта
+
+    const db = client.db("usersdb");
+    const collection = db.collection(colletion);
+    collection.findOneAndUpdate({id:user.id1},{$set:{id:user.id,tag:user.tag}}, function(err, result){
+
+        if(err){
+            return console.log(err);
+        }
+        console.log(result);
+        console.log(user);
+
+
+    });
+    // отправляем измененый объект обратно клиенту
+    response.end(JSON.stringify(user));
+}
+
+
