@@ -69,6 +69,13 @@ buttonsRight #redmasters{
 
     top: 435px;
 }
+buttonsRight #newzakaz{
+
+    width: 630px;
+    height: 500px;
+
+    top: 235px;
+}
 buttonsRight .invisible{
     right: -630px;
 }

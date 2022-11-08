@@ -267,7 +267,7 @@ async function update(request,response, colletion){
 
     const db = client.db("usersdb");
     const collection = db.collection(colletion);
-    collection.findOneAndUpdate({id:user.id1},{$set:{id:user.id,tag:user.tag}}, function(err, result){
+    collection.findOneAndUpdate({id:user.id1},{$set:{id:user.id},$set:{tag:user.tag},$set:{colum:user.colum}}, function(err, result){
 
         if(err){
             return console.log(err);

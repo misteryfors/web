@@ -16,8 +16,6 @@
     </style>
 </head>
 <body>
-<input id="in1">
-<input id="in2">
     <buttonsLeft    >
         <button onclick="showHideBtn2('#zakaz')" class="box" id="zakaz"><img src="css\dialog1.jpg" alt=""><div class="text">Заказы</div></button>
         <button onclick="showHideBtn2('#viezd')" class="box" id="viezd"><img src="css\lamba1.png" alt=""><div class="text">Выезды</div></button>
@@ -32,7 +30,7 @@
         <button onclick="showHideBtn1()" class="box" id="remaile"><div class="text1">Изменить почту</div></button>
         <button onclick="showHideBtn1()" class="box" id="rename"><div class="text1">Изменить ФИО</div></button>
         <button onclick="showHideBtn1()" class="box" id="relogo"><div class="text1">Изменить иконку</div></button>
-        <button onclick="new1()" class="box" id="new1"><div class="text1">new</div></button>
+        <button onclick="showHideBtn2('#new')" class="box" id="new1"><div class="text1">new</div></button>
         <button onclick="new2()" class="box" id="new2"><div class="text1">new</div></button>
         <button onclick="new3()" class="box" id="new3"><div class="text1">new</div></button>
         <button onclick="new4()" class="box" id="new4"><div class="text1">new</div></button>
@@ -41,11 +39,12 @@
 <tablic class="tablic invisible" id="tablica">
 
     <fon id="fons">
-        <div class="colum" style="background-color: #777778"><div class="slot droppable"></div></div>
-        <div class="colum" style="background-color: #a6a6a7"><div class="slot droppable"></div></div>
-        <div class="colum" style="background-color: #c6c6c7"><div class="slot droppable"></div></div>
+        <div class="colum" style="background-color: #777778"><div class="columname">c1</div><div class="new"><button class="buttonnew" onclick="showHideBtn3('c1')">+</button></div><div class="slot droppable" id="c1"></div></div>
+        <div class="colum" style="background-color: #a6a6a7"><div class="columname">c2</div><div class="new"><button class="buttonnew">+</button></div><div class="slot droppable" id="c2"></div></div>
+        <div class="colum" style="background-color: #c6c6c7"><div class="columname">c3</div><div class="new"><button class="buttonnew">+</button></div><div class="slot droppable" id="c3"></div></div>
     </fon>
     <buttonsRight    >
+        <form class="box invisible" id="newzakaz"><div class="text">Форма заказа</div><div><input id="in1"></div><div><input id="in2"></div><div><input id="in3"></div><div><button onclick="new1()">Создать</button></div></form>
         <form class="box invisible" id="redzakaz"><div class="text">Заказы</div></form>
         <form class="box invisible" id="redviezd"><div class="text">Выезды</div></form>
         <form class="box invisible" id="redotchet"><div class="text">Отчёты</div></form>
@@ -90,8 +89,9 @@
 <!--<p><div class="loader"></div></p>-->
 
 <script>
-    let Itemid;
     let Table;
+    let Itemid;
+    let atribute;
     function onload(){
     send("/add",
         {
@@ -113,6 +113,11 @@ function op(el){
     DragManager.onDragEnd = function(dragObject, dropElem) {
         dragObject.elem.style= "";
         dropElem.appendChild(dragObject.elem);
+        //console.log("-------------------")
+        //console.log(dragObject.elem);
+        saveInfo(dragObject.elem.id,{
+            colum:dropElem.id
+        })
     };
 
 
@@ -139,40 +144,35 @@ function showHideBtn1() {
     document.querySelector('#back').classList.toggle('invisible');
 };
 function showHideBtn2(fff) {
-    document.querySelector('#profile').classList.toggle('invisible');
-    document.querySelector('#zakaz').classList.toggle('invisible');
-    document.querySelector('#viezd').classList.toggle('invisible');
-    document.querySelector('#otchet').classList.toggle('invisible');
-    document.querySelector('#masters').classList.toggle('invisible');
-    document.querySelector(fff).classList.toggle('invisible');
-    document.querySelector(fff).classList.toggle('full');
-
-    if (fff=='#viezd')
+    if (fff=='#new')
     {
-        new2();
-        Table=document.querySelector('#tablica');
-        Table.classList.toggle('invisible');
-        document.querySelector('#new1').classList.toggle('full');
-        document.querySelector('#new2').classList.toggle('full');
+        document.querySelector('#newzakaz').classList.toggle('invisible');
+    }
+    else {
+        document.querySelector('#profile').classList.toggle('invisible');
+        document.querySelector('#zakaz').classList.toggle('invisible');
+        document.querySelector('#viezd').classList.toggle('invisible');
+        document.querySelector('#otchet').classList.toggle('invisible');
+        document.querySelector('#masters').classList.toggle('invisible');
+        document.querySelector(fff).classList.toggle('invisible');
+        document.querySelector(fff).classList.toggle('full');
+
+        if (fff == '#viezd') {
+            new2();
+            Table = document.querySelector('#tablica');
+            Table.classList.toggle('invisible');
+            document.querySelector('#new1').classList.toggle('full');
+            document.querySelector('#new2').classList.toggle('full');
+        }
     }
 };
-async function new1() {
-// клонируем элемент articleDiv
-    newslot(document.querySelector('#in1').value,document.querySelector('#in2').value)
-    let test={
-        id: document.querySelector('#in2').value,
-        tag: document.querySelector('#in1').value
-    }
-    //var now = new Date();
-    send1("/add",
-        {
-            //time: now.getFullYear()+"."+now.getMonth(),
-            id: document.querySelector('#in2').value,
-            tag: document.querySelector('#in1').value
-        });
+    function showHideBtn3(fff) {
 
+        document.querySelector('#newzakaz').classList.toggle('invisible');
+        atribute=fff;
 
-};
+    };
+
 async function new2() {
 // клонируем элемент articleDiv
         send3("/take",
@@ -187,7 +187,16 @@ async function new2() {
                 }
                 for(let elm of user)
                 {
-                    newslot(elm.tag,elm.id)
+                    for(let elm1 of document.querySelectorAll('#fons .slot'))
+                    {
+                        //console.log(elm1)
+                        //console.log(elm.colum)
+                        if (elm1.id==elm.colum)
+                        {
+                            newslot(elm.tag,elm.id,elm1)
+                        }
+                    }
+                    //newslot(elm.tag,elm.id,document.querySelectorAll('#fons .slot').findById(elm.colum))
                 }
             }
             );
@@ -259,15 +268,31 @@ async function new4() {
             if (xhr.status == 200) {
                 let user =  JSON.parse(xhr.responseText)
                 console.log(user);
+                return false;
 
             } else {
                 console.log("Server response: ", xhr.statusText);
             }
         };
-
+        return false;
 
 
     }
+    function new1() {
+// клонируем элемент articleDiv
+
+        //var now = new Date();
+        newslot(document.querySelector('#in1').value,document.querySelector('#in2').value,atribute)
+
+        send1("/add",
+            {
+                //time: now.getFullYear()+"."+now.getMonth(),
+                id: document.querySelector('#in2').value,
+                tag: document.querySelector('#in1').value,
+                colum:atribute
+            });
+
+    };
     function remove(item){
         send1("/delet",
             {
@@ -280,7 +305,8 @@ async function new4() {
             {
                 id1:id1,
                 id: item.id,
-                tag:item.tag
+                tag:item.tag,
+                colum:item.colum
             },);
     }
     function moreInfo(item){
@@ -301,7 +327,8 @@ async function new4() {
                 button.onclick=function (){
                     saveInfo(Itemid,{
                         id:document.querySelector('#id').value,
-                        tag:document.querySelector('#tag').value
+                        tag:document.querySelector('#tag').value,
+                        colum:document.querySelector('#colum').value
                     })
                     new2();
                     return false;
@@ -324,7 +351,7 @@ async function new4() {
             );
         document.querySelector('#redzakaz').classList.toggle('invisible');
     }
-function newslot(name,id){
+function newslot(name,id,slot){
     let newArticleDiv = document.createElement("div")
     let button1 = document.createElement("button")
     button1.textContent='delet';
@@ -334,7 +361,10 @@ function newslot(name,id){
     button2.textContent='change';
     button2.className='change';
     button2.onclick= function(){moreInfo(this.parentNode)};
-    newArticleDiv.textContent=name;
+    let text = document.createElement("div")
+    text.textContent=name;
+    text.className="text";
+    //newArticleDiv.textContent=name;
     newArticleDiv.id=id;
     newArticleDiv.draggable="true";
     newArticleDiv.className='draggable';
@@ -350,9 +380,11 @@ function newslot(name,id){
     max+=4;
     //console.log(tab.children.length*100);
     Table.style.height=max*100+"px";
+    newArticleDiv.appendChild(text);
     newArticleDiv.appendChild(button1);
     newArticleDiv.appendChild(button2);
-    document.querySelector('#fons .slot').appendChild(newArticleDiv);
+    slot.appendChild(newArticleDiv);
+
 }
     function newinput(tags,id){
         let newArticleDiv1 = document.createElement("div")

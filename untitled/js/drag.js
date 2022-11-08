@@ -79,11 +79,14 @@ var DragManager = new function() {
     function finishDrag(e) {
         var dropElem = findDroppable(e);
 
-        if (!dropElem) {
-            self.onDragCancel(dragObject);
-        } else {
+            if (dropElem){
             self.onDragEnd(dragObject, dropElem);
+
         }
+            else
+            {
+                self.onDragCancel(dragObject)
+            }
     }
 
     function createAvatar(e) {
@@ -108,8 +111,8 @@ var DragManager = new function() {
             avatar.style.left = old.left;
             avatar.style.top = old.top;
             avatar.style.zIndex = old.zIndex
-            avatar.style.width=old.width;
-            avatar.style.height=old.height;
+            avatar.style.width='100%';
+            avatar.style.height='100%';
         };
 
         return avatar;
@@ -128,13 +131,13 @@ var DragManager = new function() {
 
     function findDroppable(event) {
         // спрячем переносимый элемент
-        dragObject.avatar.hidden = true;
 
+        dragObject.avatar.style.display='none'
         // получить самый вложенный элемент под курсором мыши
         var elem = document.elementFromPoint(event.clientX, event.clientY);
 
         // показать переносимый элемент обратно
-        dragObject.avatar.hidden = false;
+        dragObject.avatar.style.display='flex'
 
         if (elem == null) {
             // такое возможно, если курсор мыши "вылетел" за границу окна
@@ -147,11 +150,11 @@ var DragManager = new function() {
     document.onmousemove = onMouseMove;
     document.onmouseup = onMouseUp;
     document.onmousedown = onMouseDown;
-
     this.onDragEnd = function(dragObject, dropElem) {};
     this.onDragCancel = function(dragObject) {};
 
 };
+
 
 
 function getCoords(elem) { // кроме IE8-
