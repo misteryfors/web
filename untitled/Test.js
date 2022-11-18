@@ -18,7 +18,12 @@ start();
     //<button name="send">Отправить</button>
 http.createServer(function (request,response)
 {
+    if (request.url==='/autorizetion')
+    {
+        autorization(request,response,"users");
 
+    }
+    else
     //response.setHeader("Content-Type", "text/html");
     if (request.url==='/')
     {
@@ -285,6 +290,40 @@ async function update(request,response, colletion){
     });
     // отправляем измененый объект обратно клиенту
     response.end(JSON.stringify(user));
+}
+async function autorization(request,response, colletion){
+
+    const buffers = [];
+    for await (const chunk of request) {
+        buffers.push(chunk);
+    }
+
+    const data = Buffer.concat(buffers).toString();
+    const user = JSON.parse(data); // парсим строку в json
+
+    // изменяем данные полученного объекта
+
+    const db = client.db("usersdb");
+    const collection = db.collection(colletion);
+    console.log("----------------------------")
+    console.log(user);
+
+
+    collection.findOne({name:user.name,password:user.password}, function(err, result){
+
+        if(err){
+            return console.log(err);
+        }
+        console.log(result);
+        console.log(user);
+        if (result)
+        {
+            response.end(JSON.stringify(true));
+        }
+
+    });
+    response.end(JSON.stringify(false));
+    // отправляем измененый объект обратно клиенту
 }
 
 

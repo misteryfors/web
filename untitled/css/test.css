@@ -152,14 +152,18 @@ div.draggable .text{
 }
 div.draggable  .delet{
     right: 0px;
-    width: 50px;
-    height: 50px;
+    width: 50%;
+    height: 50%;
+    max-width: 50px;
+    max-height: 50px;
     border-radius: 20px 20px 20px 20px;
     background-color: #ff8080;
 }
 div.draggable .change{
     right: 0px;
-    width: 80px;
-    height: 50px;
+    width: 50%;
+    height: 50%;
+    max-width: 80px;
+    max-height: 50px;
     border-radius: 20px 20px 20px 20px;
 }

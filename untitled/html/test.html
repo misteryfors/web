@@ -9,62 +9,50 @@
     <link href="css\buttonsTop.css" rel="stylesheet" type="text/css">
     <link href="css\buttonsCentr.css" rel="stylesheet" type="text/css">
     <link href="css\buttonsRight.css" rel="stylesheet" type="text/css">
+    <link href="css\Lock.css" rel="stylesheet" type="text/css">
     <link href="js\test.js" rel="stylesheet" type="text/xml">
     <script src="js\drag.js"></script>
-    <style>
-
-    </style>
 </head>
 <body>
     <buttonsLeft    >
-        <button onclick="showHideBtn2('#zakaz')" class="box" id="zakaz"><img src="css\dialog1.jpg" alt=""><div class="text">Заказы</div></button>
-        <button onclick="showHideBtn2('#viezd')" class="box" id="viezd"><img src="css\lamba1.png" alt=""><div class="text">Выезды</div></button>
-        <button onclick="showHideBtn2('#otchet')" class="box" id="otchet"><img src="css\Otchet1.jpg" alt=""><div class="text">Отчёты</div></button>
-        <button onclick="showHideBtn2('#masters')" class="box" id="masters"><img src="css\medium.jpg" alt=""><div class="text">Мастера</div></button>
+        <button onclick="showHideBtn2('#zakaz')" class="box invisible" id="zakaz"><img src="css\dialog1.jpg" alt=""><div class="text">Заказы</div></button>
+        <button onclick="showHideBtn2('#viezd')" class="box invisible" id="viezd"><img src="css\lamba1.png" alt=""><div class="text">Выезды</div></button>
+        <button onclick="showHideBtn2('#otchet')" class="box invisible" id="otchet"><img src="css\Otchet1.jpg" alt=""><div class="text">Отчёты</div></button>
+        <button onclick="showHideBtn2('#masters')" class="box invisible" id="masters"><img src="css\medium.jpg" alt=""><div class="text">Мастера</div></button>
     </buttonsLeft>
     <buttonsTop    >
         <button onclick="showHideBtn1()" class="box invisible" id="back"><div class="text1">Back</div></button>
-        <button onclick="showHideBtn1()" class="box" id="profile"><div class="text1">MistFors@mail.ru</div><div class="text2">MistFors</div><img src="css\Profile.PNG" alt=""></button>
+        <button onclick="showHideBtn1()" class="box invisible" id="profile"><div class="text1">MistFors@mail.ru</div><div class="text2">MistFors</div><img src="css\Profile.PNG" alt=""></button>
     </buttonsTop>
     <buttonsCentr>
         <button onclick="showHideBtn1()" class="box" id="remaile"><div class="text1">Изменить почту</div></button>
         <button onclick="showHideBtn1()" class="box" id="rename"><div class="text1">Изменить ФИО</div></button>
         <button onclick="showHideBtn1()" class="box" id="relogo"><div class="text1">Изменить иконку</div></button>
-        <button onclick="showHideBtn2('#new')" class="box" id="new1"><div class="text1">new</div></button>
-        <button onclick="new2('fons')" class="box" id="new2"><div class="text1">new</div></button>
-        <button onclick="new3()" class="box" id="new3"><div class="text1">new</div></button>
-        <button onclick="new4()" class="box" id="new4"><div class="text1">new</div></button>
     </buttonsCentr>
-
-<tablic class="tablic invisible" id="tablica">
-
-        <TableSlot id="fons">
-        <div class="colum" style="background-color: #777778"><div class="columname">c1</div><div class="new"><button class="buttonnew" onclick="showHideBtn3('c1')">+</button></div><div class="slot droppable" id="c1"></div></div>
-        <div class="colum" style="background-color: #a6a6a7"><div class="columname">c2</div><div class="new"><button class="buttonnew" onclick="showHideBtn3('c2')">+</button></div><div class="slot droppable" id="c2"></div></div>
-        <div class="colum" style="background-color: #c6c6c7"><div class="columname">c3</div><div class="new"><button class="buttonnew" onclick="showHideBtn3('c3')">+</button></div><div class="slot droppable" id="c3"></div></div>
-    </TableSlot>
     <buttonsRight    >
-        <form class="box invisible" id="newzakaz" style="z-index: 101"><div class="text">Форма заказа</div><div><input id="in1"></div><div><input id="in2"></div><div><input id="in3"></div><div><button type="button" onclick="new1()">Создать</button></div></form>
+        <form class="box invisible" id="newzakaz" style="z-index: 102"><div class="text">Форма заказа</div><div><input id="in1"></div><div><input id="in2"></div><div><input id="in3"></div><div><button type="button" onclick="new1()">Создать</button></div></form>
         <form class="box invisible" id="redzakaz"><div class="text">Заказы</div></form>
         <form class="box invisible" id="redviezd"><div class="text">Выезды</div></form>
         <form class="box invisible" id="redotchet"><div class="text">Отчёты</div></form>
         <form class="box invisible" id="redmasters"><div class="text">Мастера</div></form>
     </buttonsRight>
+    <div class="lock" id="lock">
+        <div class="blocker" id="blocker"><img src="css\zamok1.png"></div>
+        <div class="locker" id="locker"><img src="css\zamok2.png"></div>
+    </div>
+    <div class="keyBox" id="keyBox">
+            <div class="key" id="key"><img src="css\key.png">
+                <div class="inputBox" id="inputBox">
+                    <div class="box">
+                        <div class="text">Авторизация</div>
+                        <div><input></div>
+                        <div><input></div>
+                        <button type="button" onclick="autorization()">Войти</button>
+                    </div>
+                </div>
+            </div>
+    </div>
 
-
-
-</tablic>
-<script type="text/javascript">
-    btn = document.createElement('BUTTON');
-    btn.id='cm3';
-    btn.onclick=function (){
-
-        document.body.appendChild(createTable(['c1','c2','c3','c4','c5'],'tab'))
-    }
-    btn.textContent='1111';
-    document.body.appendChild(btn);
-
-</script>
 
 <!--<p><div class="loader"></div></p>-->
 
@@ -82,15 +70,9 @@
             tag: document.querySelector('#in1').value
         });
 }
-
-
-
-
-
     DragManager.onDragCancel = function(dragObject) {
         dragObject.avatar.rollback();
     };
-
     DragManager.onDragEnd = function(dragObject, dropElem) {
         dragObject.elem.style= "";
         dropElem.appendChild(dragObject.elem);
@@ -105,20 +87,10 @@
             colum:dropElem.id
         })
     };
-
-
-
-
-
-
-
-
-
-function profile(button)
-{
+    function profile(button) {
 button.className="zzz";
 }
-function showHideBtn1() {
+    function showHideBtn1() {
     document.querySelector('#zakaz').classList.toggle('invisible');
     document.querySelector('#viezd').classList.toggle('invisible');
     document.querySelector('#otchet').classList.toggle('invisible');
@@ -129,7 +101,7 @@ function showHideBtn1() {
     document.querySelector('#relogo').classList.toggle('full');
     document.querySelector('#back').classList.toggle('invisible');
 };
-function showHideBtn2(fff) {
+    function showHideBtn2(fff) {
     if (fff=='#new')
     {
         document.querySelector('#newzakaz').classList.toggle('invisible');
@@ -160,18 +132,48 @@ function showHideBtn2(fff) {
 
             //let Table = document.querySelector('#tablica');
 
-            document.querySelector('#new1').classList.toggle('full');
-            document.querySelector('#new2').classList.toggle('full');
         }
     }
 };
+    function autorization(){
+        send3('/autorizetion',
+            {
+                name:"document.querySelector('#in1').value",
+                password:"document.querySelector('#in1').value"
+            },
+            function (data)
+            {
+            if (data!==true) {
+                DataTable = data;
+                setTimeout("document.querySelector('#locker').classList.toggle('hover')", 150);
+                setTimeout("document.querySelector('#profile').classList.toggle('invisible');", 1650);
+                setTimeout("document.querySelector('#zakaz').classList.toggle('invisible');", 1650);
+                setTimeout("document.querySelector('#viezd').classList.toggle('invisible');", 1650);
+                setTimeout("document.querySelector('#otchet').classList.toggle('invisible');", 1650);
+                setTimeout("document.querySelector('#masters').classList.toggle('invisible');", 1650);
+                setTimeout("document.querySelector('#lock').classList.toggle('invisible')", 1650);
+                setTimeout("document.querySelector('#key').classList.toggle('invisible')", 1650);
+
+
+            }
+            else {
+                setTimeout("document.querySelector('#inputBox').classList.toggle('invisible')", 550);
+                setTimeout("document.querySelector('#key').classList.toggle('hover')", 550);
+
+            }
+            }
+
+        )
+        document.querySelector('#inputBox').classList.toggle('invisible')
+        document.querySelector('#key').classList.toggle('hover')
+    }
     function showHideBtn3(fff) {
 
         document.querySelector('#newzakaz').classList.toggle('invisible');
         atribute=fff;
 
     };
-function fillTable(table,data,columkey){
+    function fillTable(table,data,columkey){
     for(let slot of table.querySelectorAll('.slot')) {
         while (slot.firstChild) {
             slot.removeChild(slot.firstChild);
@@ -187,7 +189,7 @@ function fillTable(table,data,columkey){
     }
 
 }
-async function new2(table,columkey) {
+    async function new2(table,columkey) {
 // клонируем элемент articleDiv
         let Table = document.getElementById(table)
         if (!DataTable) {
@@ -280,6 +282,7 @@ async function new2(table,columkey) {
                 id: item.id
             });
         slot.removeChild(item);
+        DataTable = DataTable.filter((value, index) => value.id !== item.id);
     }
     function saveInfo(id1,item){
 
@@ -321,6 +324,7 @@ async function new2(table,columkey) {
                 but.appendChild(button);
                 text.textContent='Заказ '+user[0].id;
                 text.className='text';
+                slot.style.zIndex=101;
                 slot.appendChild(text)
 
                 for (var elm of user) {
@@ -334,7 +338,7 @@ async function new2(table,columkey) {
             );
         document.querySelector('#redzakaz').classList.toggle('invisible');
     }
-function newslot(name,id,slot,Table){
+    function newslot(name,id,slot,Table){
     let newArticleDiv = document.createElement("div")
     let button1 = document.createElement("button")
     button1.textContent='delet';
@@ -423,16 +427,7 @@ function newslot(name,id,slot,Table){
                 newTable.appendChild(colum);
                 z = z - 10;
             }
-            let max = 0;
-            for (let elm of fons.children) {
-                for (let elm1 of elm.children) {
-                    if (elm1.children.length > max)
-                        max = elm1.children.length;
-                }
-            }
-            max += 4;
-            //console.log(tab.children.length*100);
-            newTable.style.height = max * 100 + "px";
+
             newtablic.appendChild(newTable);
             return newtablic;
     }
